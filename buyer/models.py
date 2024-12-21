@@ -11,13 +11,3 @@ class Buyer(models.Model):
     book_quantity = models.FloatField(default=0)
     total_price = models.FloatField(default=0)
     is_transaction = models.BooleanField(default=False)
-
-# class CartBooks(models.Model):
-#     book_name = models.CharField(max_length=50)
-#     book_discription= models.CharField(max_length=100)
-#     book_price = models.FloatField()
-#     book_quantity = models.IntegerField()
-
-# class Cart(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     item = models.ForeignKey(CartBooks, on_delete=models.CASCADE)
