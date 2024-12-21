@@ -54,6 +54,7 @@ class checkout(APIView):
     
 
     def post(self, request):
+        
         buyer = Buyer.objects.filter(user = request.user.id).first()
         if buyer.is_transaction == False:
             stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
