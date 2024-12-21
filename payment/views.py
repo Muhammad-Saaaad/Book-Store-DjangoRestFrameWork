@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework.permissions import BasePermission
 
 from authentication.views import JwtAuthentication
@@ -53,7 +54,6 @@ class checkout(APIView):
     
 
     def post(self, request):
-
         buyer = Buyer.objects.filter(user = request.user.id).first()
         if buyer.is_transaction == False:
             stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
@@ -79,6 +79,8 @@ class checkout(APIView):
                 cancel_url=request.build_absolute_uri(reverse("cancel"))
             )
             return JsonResponse({"url":session.url,})
+        else:
+            return Response({"Message":"Transcation is already been successfull"})
 
 @csrf_exempt # disable csrf (Cross-Site Request Forgery) Protection(does not check for csrf token)
 def my_webhook_view(request):
