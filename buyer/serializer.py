@@ -10,7 +10,7 @@ class BooksSerializerShow(serializers.ModelSerializer):
 
         #
     
-class BooksSerializerBuy(serializers.ModelSerializer):
+class BuyerSerializerBuy(serializers.ModelSerializer):
     class Meta:
         model = Buyer
         fields = '__all__'
