@@ -7,8 +7,6 @@ class BooksSerializerShow(serializers.ModelSerializer):
     class Meta:
         model = Book
         exclude = ['user']
-
-        #
     
 class BuyerSerializerBuy(serializers.ModelSerializer):
     class Meta:
