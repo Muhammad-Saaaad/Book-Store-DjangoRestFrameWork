@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 
 from seller.models import Shop, Book
 from seller.serializer import ShopSerializerShow
-from .serializer import BooksSerializerShow , BooksSerializerBuy
+from .serializer import BooksSerializerShow , BuyerSerializerBuy
 from authentication.auth_token import JwtAuthentication
 
 
@@ -63,7 +63,7 @@ class BuyShowBooks(APIView):
                 total_price = quantity * book.book_price
                 data = {"user":request.user.id, "book":book.id , "book_quantity":quantity , "total_price":total_price}
 
-                serializer = BooksSerializerBuy(data=data)
+                serializer = BuyerSerializerBuy(data=data)
                 if serializer.is_valid():
                     serializer.save()
                     return Response({"Message":serializer.data}, status=status.HTTP_201_CREATED)
