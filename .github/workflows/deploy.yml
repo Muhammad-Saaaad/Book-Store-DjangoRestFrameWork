@@ -1,0 +1,21 @@
+name: Deploy to EC2
+on:
+  push:
+    branches: [main]  # Trigger on pushes to the "main" branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # The Actions runner (VM) that executes the steps
+    steps:
+      # Connect to EC2 via SSH and update code
+      - name: Deploy code to EC2
+        uses: appleboy/ssh-action@v1.0.7  # Popular SSH action for GitHub Actions
+        with:
+          host: ${{ secrets.EC2_IP }}       # EC2 public IP (stored in GitHub Secrets)
+          username: ubuntu                  # Default Ubuntu username
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # SSH private key (as a secret)
+          script: |  # Commands to run on EC2
+            cd /path/to/your/app  # Navigate to your app directory
+            git pull origin main  # Pull latest code
+            npm install           # Install dependencies (if needed, e.g., Node.js)
+            pm2 restart app-name  # Restart your app server
