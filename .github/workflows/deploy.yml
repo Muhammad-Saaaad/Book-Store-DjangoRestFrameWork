@@ -15,7 +15,10 @@ jobs:
           username: ubuntu                  # Default Ubuntu username
           key: ${{ secrets.SSH_PRIVATE_KEY }} # SSH private key (as a secret)
           script: |  # Commands to run on EC2
-            cd /path/to/your/app  # Navigate to your app directory
+            cd Book-Store-DjangoRestFrameWork  # Navigate to your app directory
             git pull origin main  # Pull latest code
-            npm install           # Install dependencies (if needed, e.g., Node.js)
-            pm2 restart app-name  # Restart your app server
+            pip install -r requirenments.txt           # Install dependencies (if needed, e.g., Node.js)
+
+            pkill -f "python manage.py runserver 0.0.0.0:8000" # Stop the existing server
+            
+            nohup python manage.py runserver 0.0.0.0:8000 & # Start the server again
