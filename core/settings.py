@@ -28,6 +28,8 @@ SECRET_KEY = "django-insecure-ad8@%w84@g)82n9ycug=c_8n80@m_qrtf(dno7%3dte!#ac@e!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# for live production add your ip address here
+
 ALLOWED_HOSTS = []
 
 
@@ -60,7 +62,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "core.urls"
 
-TEMPLATES = [
+TEMPLATES = [ # for adding frontend template
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / "core/template"],
